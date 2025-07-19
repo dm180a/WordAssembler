@@ -7,9 +7,10 @@ import type { Word } from "@shared/schema";
 interface WordDisplayProps {
   word: Word;
   isAssembled: boolean;
+  onWordSelect?: (word: string) => void;
 }
 
-export default function WordDisplay({ word, isAssembled }: WordDisplayProps) {
+export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDisplayProps) {
   const [activeTooltip, setActiveTooltip] = useState<{
     text: string;
     type: string;
@@ -132,6 +133,7 @@ export default function WordDisplay({ word, isAssembled }: WordDisplayProps) {
             type={activeTooltip.type}
             position={activeTooltip.position}
             onClose={handleCloseTooltip}
+            onWordSelect={onWordSelect}
           />
         )}
       </AnimatePresence>

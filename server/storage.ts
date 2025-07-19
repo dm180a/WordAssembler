@@ -107,6 +107,42 @@ export class MemStorage implements IStorage {
       examples: ["respectful", "helpful", "beautiful", "wonderful"]
     });
 
+    // Add morphemes for example words
+    const agreeMorpheme = await this.createMorpheme({
+      text: "agree",
+      type: "root",
+      definition: "To have the same opinion; to consent",
+      examples: ["agreement", "disagree", "agreeable", "agreeing"]
+    });
+
+    const appearMorpheme = await this.createMorpheme({
+      text: "appear",
+      type: "root",
+      definition: "To come into sight; to seem",
+      examples: ["appearance", "disappear", "apparent", "appearing"]
+    });
+
+    const connectMorpheme = await this.createMorpheme({
+      text: "connect",
+      type: "root",
+      definition: "To join or link together",
+      examples: ["connection", "disconnect", "connected", "connector"]
+    });
+
+    const likeMorpheme = await this.createMorpheme({
+      text: "like",
+      type: "root",
+      definition: "To find agreeable or satisfactory",
+      examples: ["likely", "dislike", "likable", "liking"]
+    });
+
+    const turbMorpheme = await this.createMorpheme({
+      text: "turb",
+      type: "root",
+      definition: "To disturb or confuse",
+      examples: ["disturb", "turbulent", "turbulence", "perturb"]
+    });
+
     // Create example words
     await this.createWord({
       word: "dishonesty",
@@ -145,6 +181,57 @@ export class MemStorage implements IStorage {
         prefix: "dis-",
         root: "respect",
         suffix: "-ful"
+      }
+    });
+
+    // Add more example words that appear in morpheme examples
+    await this.createWord({
+      word: "disagree",
+      definition: "to have a different opinion; not agree",
+      components: {
+        prefix: "dis-",
+        root: "agree",
+        suffix: ""
+      }
+    });
+
+    await this.createWord({
+      word: "disappear",
+      definition: "to go out of sight; vanish",
+      components: {
+        prefix: "dis-",
+        root: "appear",
+        suffix: ""
+      }
+    });
+
+    await this.createWord({
+      word: "disconnect",
+      definition: "to break the connection of; unplug",
+      components: {
+        prefix: "dis-",
+        root: "connect",
+        suffix: ""
+      }
+    });
+
+    await this.createWord({
+      word: "dislike",
+      definition: "to regard with distaste or aversion",
+      components: {
+        prefix: "dis-",
+        root: "like",
+        suffix: ""
+      }
+    });
+
+    await this.createWord({
+      word: "disturb",
+      definition: "to interfere with the normal arrangement",
+      components: {
+        prefix: "dis-",
+        root: "turb",
+        suffix: ""
       }
     });
   }

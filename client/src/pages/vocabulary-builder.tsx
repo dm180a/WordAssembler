@@ -70,6 +70,7 @@ export default function VocabularyBuilder() {
                 <WordDisplay 
                   word={currentWord}
                   isAssembled={isAssembled}
+                  onWordSelect={handleWordSelect}
                 />
               )}
               

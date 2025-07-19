@@ -9,9 +9,10 @@ interface MorphemeTooltipProps {
   type: string;
   position: { x: number; y: number };
   onClose: () => void;
+  onWordSelect?: (word: string) => void;
 }
 
-export default function MorphemeTooltip({ text, type, position, onClose }: MorphemeTooltipProps) {
+export default function MorphemeTooltip({ text, type, position, onClose, onWordSelect }: MorphemeTooltipProps) {
   const { data: morpheme, isLoading } = useQuery({
     queryKey: ["/api/morphemes", text, type],
   });
@@ -104,12 +105,18 @@ export default function MorphemeTooltip({ text, type, position, onClose }: Morph
           <h5 className="font-semibold text-gray-800 mb-2">Other examples:</h5>
           <div className="flex flex-wrap gap-2">
             {morpheme.examples.map((example, index) => (
-              <span 
+              <button 
                 key={index}
-                className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm"
+                onClick={() => {
+                  if (onWordSelect) {
+                    onWordSelect(example);
+                    onClose();
+                  }
+                }}
+                className="bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-700 px-2 py-1 rounded text-sm transition-colors cursor-pointer border hover:border-blue-300"
               >
                 {example}
-              </span>
+              </button>
             ))}
           </div>
         </div>
