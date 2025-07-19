@@ -1,8 +1,8 @@
-# Vocabulary Builder Application
+# Word Assembler Application
 
 ## Overview
 
-This is a full-stack vocabulary learning application built with React, Express, and PostgreSQL. The app teaches word morphology through an interactive LEGO-block visualization system, where users can assemble and disassemble words to understand their prefix, root, and suffix components.
+This is a full-stack word learning application built with React, Express, and PostgreSQL. The app teaches word morphology through an interactive LEGO-block visualization system, where users can assemble and disassemble words to understand their prefix, root, and suffix components.
 
 ## User Preferences
 

@@ -53,7 +53,7 @@ export default function VocabularyBuilder() {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">🧱 LEGO Vocabulary Builder</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">🧱 Word Assembler</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Break down words into their building blocks! Click on each LEGO piece to discover how prefixes, roots, and suffixes work together.
           </p>
