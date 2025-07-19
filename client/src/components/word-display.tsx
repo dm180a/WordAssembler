@@ -60,7 +60,7 @@ export default function WordDisplay({ word, isAssembled }: WordDisplayProps) {
       },
     }),
     disassembled: (index: number) => ({
-      x: (index - 1) * 120, // Spread blocks horizontally
+      x: (index - 1) * 60, // Shorter distance between blocks
       y: 0,
       opacity: 1,
       scale: 1,

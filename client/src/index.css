@@ -143,10 +143,7 @@
 
 /* Root Block - has holes on both left and right sides */
 .root-block {
-  background: 
-    radial-gradient(ellipse 8px 12px at -8px 50%, rgba(0, 0, 0, 0.4) 40%, transparent 41%),
-    radial-gradient(ellipse 8px 12px at calc(100% + 8px) 50%, rgba(0, 0, 0, 0.4) 40%, transparent 41%),
-    linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
   border-radius: 8px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -155,6 +152,32 @@
   padding-left: 16px;
   padding-right: 16px;
   position: relative;
+}
+
+.root-block::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px 0 0 8px;
+  box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.root-block::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0 8px 8px 0;
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Suffix Block - has connector on left side */
