@@ -121,6 +121,8 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
               type={component.type}
               onClick={(event) => handleBlockClick(component.text, component.type, event)}
               isActive={activeTooltip?.text === component.text && activeTooltip?.type === component.type}
+              hasPrefix={!!word.components.prefix}
+              hasSuffix={!!word.components.suffix}
             />
           </motion.div>
         ))}

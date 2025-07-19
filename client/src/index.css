@@ -141,12 +141,11 @@
     inset 0 2px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Root Block - simple side grooves to match connectors */
+/* Root Block - Both grooves (prefix and suffix) */
 .root-block {
   background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
   border-radius: 8px;
   position: relative;
-  /* Simple rectangular grooves on sides */
   clip-path: polygon(
     0% 0%, 
     0% 40%, 
@@ -165,7 +164,6 @@
   padding-right: 16px;
 }
 
-/* Left groove depth effect */
 .root-block::before {
   content: '';
   position: absolute;
@@ -180,7 +178,6 @@
     inset 0 -2px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Right groove depth effect */
 .root-block::after {
   content: '';
   position: absolute;
@@ -193,6 +190,81 @@
     inset -2px 0 4px rgba(0, 0, 0, 0.4),
     inset 0 2px 2px rgba(0, 0, 0, 0.2),
     inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Root Block - Only left groove (prefix only) */
+.root-block-left-only {
+  background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  border-radius: 8px;
+  position: relative;
+  clip-path: polygon(
+    0% 0%, 
+    0% 40%, 
+    8px 40%, 
+    8px 60%, 
+    0% 60%, 
+    0% 100%, 
+    100% 100%, 
+    100% 0%
+  );
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.root-block-left-only::before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: 40%;
+  width: 8px;
+  height: 20%;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    inset 2px 0 4px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Root Block - Only right groove (suffix only) */
+.root-block-right-only {
+  background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  border-radius: 8px;
+  position: relative;
+  clip-path: polygon(
+    0% 0%, 
+    0% 100%, 
+    100% 100%, 
+    100% 60%, 
+    calc(100% - 8px) 60%, 
+    calc(100% - 8px) 40%, 
+    100% 40%, 
+    100% 0%
+  );
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.root-block-right-only::after {
+  content: '';
+  position: absolute;
+  right: 0px;
+  top: 40%;
+  width: 8px;
+  height: 20%;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    inset -2px 0 4px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Root Block - No grooves (standalone root) */
+.root-block-no-grooves {
+  background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  border-radius: 8px;
+  position: relative;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 /* Suffix Block - has connector on left side */

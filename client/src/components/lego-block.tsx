@@ -6,15 +6,26 @@ interface LegoBlockProps {
   type: "prefix" | "root" | "suffix";
   onClick: (event: React.MouseEvent) => void;
   isActive?: boolean;
+  hasPrefix?: boolean;
+  hasSuffix?: boolean;
 }
 
-export default function LegoBlock({ text, type, onClick, isActive = false }: LegoBlockProps) {
+export default function LegoBlock({ text, type, onClick, isActive = false, hasPrefix = false, hasSuffix = false }: LegoBlockProps) {
   const getBlockStyles = (type: string) => {
     switch (type) {
       case "prefix":
         return "lego-block prefix-block";
       case "root":
-        return "lego-block root-block";
+        // Apply different root styles based on what connectors are needed
+        if (hasPrefix && hasSuffix) {
+          return "lego-block root-block"; // Both grooves
+        } else if (hasPrefix && !hasSuffix) {
+          return "lego-block root-block-left-only"; // Only left groove
+        } else if (!hasPrefix && hasSuffix) {
+          return "lego-block root-block-right-only"; // Only right groove
+        } else {
+          return "lego-block root-block-no-grooves"; // No grooves
+        }
       case "suffix":
         return "lego-block suffix-block";
       default:
