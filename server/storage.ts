@@ -159,7 +159,16 @@ export class MemStorage implements IStorage {
 
   async createWord(insertWord: InsertWord): Promise<Word> {
     const id = this.currentWordId++;
-    const word: Word = { ...insertWord, id };
+    const word: Word = { 
+      id, 
+      word: insertWord.word,
+      definition: insertWord.definition,
+      components: {
+        prefix: insertWord.components.prefix as string | undefined,
+        root: insertWord.components.root,
+        suffix: insertWord.components.suffix as string | undefined
+      }
+    };
     this.words.set(insertWord.word, word);
     return word;
   }
@@ -175,7 +184,13 @@ export class MemStorage implements IStorage {
 
   async createMorpheme(insertMorpheme: InsertMorpheme): Promise<Morpheme> {
     const id = this.currentMorphemeId++;
-    const morpheme: Morpheme = { ...insertMorpheme, id };
+    const morpheme: Morpheme = { 
+      id,
+      text: insertMorpheme.text,
+      type: insertMorpheme.type,
+      definition: insertMorpheme.definition,
+      examples: (insertMorpheme.examples as string[]) || []
+    };
     const key = `${insertMorpheme.text}-${insertMorpheme.type}`;
     this.morphemes.set(key, morpheme);
     return morpheme;

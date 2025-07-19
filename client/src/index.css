@@ -131,28 +131,102 @@
     inset 0 2px 0 rgba(255, 255, 255, 0.4);
 }
 
+/* Prefix Block - connector on right side */
 .prefix-block {
   background: linear-gradient(145deg, var(--lego-red), hsl(0, 70%, 50%));
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .prefix-block::before {
   background: linear-gradient(145deg, var(--lego-red), hsl(0, 70%, 50%));
 }
 
+.prefix-block::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 24px;
+  background: linear-gradient(145deg, var(--lego-red), hsl(0, 70%, 50%));
+  border-radius: 0 8px 8px 0;
+  box-shadow: 
+    2px 0 4px rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Root Block - has connector on right and hole on left */
 .root-block {
   background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+/* Left side indentation hole for root block */
+.root-block {
+  background: 
+    radial-gradient(ellipse 8px 12px at -8px 50%, rgba(0, 0, 0, 0.3) 40%, transparent 41%),
+    linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
 }
 
 .root-block::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 12px;
+  border-radius: 50% 50% 0 0;
   background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  box-shadow: 
+    0 -2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
+.root-block::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 24px;
+  background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  border-radius: 0 8px 8px 0;
+  box-shadow: 
+    2px 0 4px rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Suffix Block - hole on left side */
 .suffix-block {
-  background: linear-gradient(145deg, var(--lego-green), hsl(147, 45%, 40%));
+  background: 
+    radial-gradient(ellipse 8px 12px at -8px 50%, rgba(0, 0, 0, 0.3) 40%, transparent 41%),
+    linear-gradient(145deg, var(--lego-green), hsl(147, 45%, 40%));
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 16px;
 }
 
 .suffix-block::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 12px;
+  border-radius: 50% 50% 0 0;
   background: linear-gradient(145deg, var(--lego-green), hsl(147, 45%, 40%));
+  box-shadow: 
+    0 -2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* Tooltip Styles */
