@@ -381,7 +381,7 @@ export class MemStorage implements IStorage {
       { word: "invitation", definition: "an act of inviting", components: { prefix: "", root: "invite", suffix: "-tion" }},
       { word: "location", definition: "a particular place", components: { prefix: "", root: "locate", suffix: "-tion" }},
       { word: "vacation", definition: "time off from work", components: { prefix: "", root: "vacate", suffix: "-tion" }},
-      { word: "station", definition: "a place or building", components: { prefix: "", root: "state", suffix: "-tion" }},
+      { word: "station", definition: "a place or building", components: { prefix: "", root: "stat", suffix: "-ion" }},
       
       // More complex combinations
       { word: "reconstruction", definition: "building again", components: { prefix: "re-", root: "construct", suffix: "-tion" }},
@@ -474,7 +474,8 @@ export class MemStorage implements IStorage {
       { text: "invite", type: "root", definition: "To ask to come", examples: ["invitation", "inviting", "invited", "invitee"] },
       { text: "locate", type: "root", definition: "To find the position", examples: ["location", "locating", "located", "locator"] },
       { text: "vacate", type: "root", definition: "To leave empty", examples: ["vacation", "vacating", "vacated", "vacancy"] },
-      { text: "state", type: "root", definition: "To express clearly", examples: ["station", "stating", "stated", "statement"] },
+      { text: "state", type: "root", definition: "To express clearly", examples: ["stating", "stated", "statement", "restate"] },
+      { text: "stat", type: "root", definition: "To stand", examples: ["station", "static", "statue", "status"] },
       { text: "friend", type: "root", definition: "A person you like", examples: ["friendly", "unfriendly", "friendship", "befriend"] },
       { text: "historic", type: "root", definition: "Famous in history", examples: ["prehistoric", "historical", "historian", "history"] },
       { text: "rely", type: "root", definition: "To depend on", examples: ["reliable", "unreliable", "relying", "relied"] },
@@ -487,6 +488,7 @@ export class MemStorage implements IStorage {
       { text: "-ing", type: "suffix", definition: "Present action", examples: ["reading", "writing", "running", "singing"] },
       { text: "-ed", type: "suffix", definition: "Past action", examples: ["played", "worked", "walked", "talked"] },
       { text: "-tion", type: "suffix", definition: "The act of", examples: ["creation", "education", "celebration", "information"] },
+      { text: "-ion", type: "suffix", definition: "The act or state of", examples: ["station", "nation", "action", "motion"] },
       { text: "-ably", type: "suffix", definition: "In a way that can be", examples: ["disagreeably", "comfortably", "remarkably", "predictably"] },
       { text: "-ty", type: "suffix", definition: "State or quality of being", examples: ["loyalty", "safety", "beauty", "novelty"] }
     ];
@@ -496,9 +498,9 @@ export class MemStorage implements IStorage {
       await this.createMorpheme(morphemeData);
     }
 
-    // Add more -y suffix words and their roots
-    const ySuffixWords = [
-      { word: "safety", definition: "the condition of being safe", components: { prefix: "", root: "safe", suffix: "-y" }},
+    // Add more etymologically accurate words
+    const additionalWords = [
+      { word: "safety", definition: "the condition of being safe", components: { prefix: "", root: "safe", suffix: "-ty" }},
       { word: "beauty", definition: "the quality of being beautiful", components: { prefix: "", root: "beauty", suffix: "" }}, // beauty is actually the root
       { word: "loyalty", definition: "the quality of being loyal", components: { prefix: "", root: "loyal", suffix: "-ty" }},
       { word: "penalty", definition: "a punishment for wrongdoing", components: { prefix: "", root: "penal", suffix: "-ty" }},
@@ -507,26 +509,40 @@ export class MemStorage implements IStorage {
       { word: "honesty", definition: "the quality of being honest", components: { prefix: "", root: "honest", suffix: "-y" }},
       { word: "modesty", definition: "the quality of being modest", components: { prefix: "", root: "modest", suffix: "-y" }},
       { word: "plenty", definition: "a large amount", components: { prefix: "", root: "plent", suffix: "-y" }},
-      { word: "empty", definition: "containing nothing", components: { prefix: "", root: "empt", suffix: "-y" }}
+      { word: "empty", definition: "containing nothing", components: { prefix: "", root: "empt", suffix: "-y" }},
+      
+      // More -ion words with stat- root
+      { word: "nation", definition: "a country", components: { prefix: "", root: "nat", suffix: "-ion" }},
+      { word: "action", definition: "something done", components: { prefix: "", root: "act", suffix: "-ion" }},
+      { word: "motion", definition: "movement", components: { prefix: "", root: "mot", suffix: "-ion" }},
+      { word: "emotion", definition: "feeling", components: { prefix: "e-", root: "mot", suffix: "-ion" }},
+      { word: "devotion", definition: "dedication", components: { prefix: "de-", root: "vot", suffix: "-ion" }},
+      { word: "promotion", definition: "advancement", components: { prefix: "pro-", root: "mot", suffix: "-ion" }}
     ];
 
     // Add corresponding root morphemes
-    const yRootMorphemes = [
+    const additionalRootMorphemes = [
       { text: "loyal", type: "root", definition: "Faithful and devoted", examples: ["loyalty", "disloyal", "loyalist", "loyally"] },
       { text: "penal", type: "root", definition: "Related to punishment", examples: ["penalty", "penalize", "penal", "penalties"] },
       { text: "novel", type: "root", definition: "New and original", examples: ["novelty", "novelist", "novelize", "novels"] },
       { text: "special", type: "root", definition: "Better than usual", examples: ["specialty", "specialist", "specialize", "specially"] },
       { text: "modest", type: "root", definition: "Not boastful", examples: ["modesty", "modestly", "immodest", "modestness"] },
       { text: "plent", type: "root", definition: "Abundance", examples: ["plenty", "plentiful", "replenish", "plenty"] },
-      { text: "empt", type: "root", definition: "Without contents", examples: ["empty", "emptied", "emptying", "emptiness"] }
+      { text: "empt", type: "root", definition: "Without contents", examples: ["empty", "emptied", "emptying", "emptiness"] },
+      
+      // Additional roots for -ion words
+      { text: "nat", type: "root", definition: "Born, birth", examples: ["nation", "native", "nature", "innate"] },
+      { text: "act", type: "root", definition: "To do", examples: ["action", "active", "actor", "activity"] },
+      { text: "mot", type: "root", definition: "To move", examples: ["motion", "motor", "promote", "emotion"] },
+      { text: "vot", type: "root", definition: "To vow", examples: ["devotion", "vote", "devote", "votive"] }
     ];
 
-    // Create y-suffix morphemes and words
-    for (const morphemeData of yRootMorphemes) {
+    // Create additional morphemes and words
+    for (const morphemeData of additionalRootMorphemes) {
       await this.createMorpheme(morphemeData);
     }
 
-    for (const wordData of ySuffixWords) {
+    for (const wordData of additionalWords) {
       await this.createWord(wordData);
     }
 
