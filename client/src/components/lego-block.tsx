@@ -5,14 +5,12 @@ interface LegoBlockProps {
   text: string;
   type: "prefix" | "root" | "suffix";
   onClick: (event: React.MouseEvent) => void;
-  onMouseEnter?: (event: React.MouseEvent) => void;
-  onMouseLeave?: (event: React.MouseEvent) => void;
   isActive?: boolean;
   hasPrefix?: boolean;
   hasSuffix?: boolean;
 }
 
-export default function LegoBlock({ text, type, onClick, onMouseEnter, onMouseLeave, isActive = false, hasPrefix = false, hasSuffix = false }: LegoBlockProps) {
+export default function LegoBlock({ text, type, onClick, isActive = false, hasPrefix = false, hasSuffix = false }: LegoBlockProps) {
   const getBlockStyles = (type: string) => {
     switch (type) {
       case "prefix":
@@ -43,8 +41,6 @@ export default function LegoBlock({ text, type, onClick, onMouseEnter, onMouseLe
         isActive && "active"
       )}
       onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       whileHover={{
         y: -4,
         scale: 1.05,

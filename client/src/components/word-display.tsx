@@ -17,7 +17,7 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
     position: { x: number; y: number };
   } | null>(null);
 
-  const handleBlockHover = (text: string, type: string, event: React.MouseEvent) => {
+  const handleBlockClick = (text: string, type: string, event: React.MouseEvent) => {
     const rect = (event.target as HTMLElement).getBoundingClientRect();
     setActiveTooltip({
       text,
@@ -27,46 +27,6 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
         y: rect.bottom + 10,
       },
     });
-  };
-
-  const handleBlockClick = (text: string, type: string, event: React.MouseEvent) => {
-    // For mobile devices, use click to show tooltip
-    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
-    if (isMobile) {
-      const rect = (event.target as HTMLElement).getBoundingClientRect();
-      setActiveTooltip({
-        text,
-        type,
-        position: {
-          x: rect.left + rect.width / 2,
-          y: rect.bottom + 10,
-        },
-      });
-    }
-  };
-
-  const handleBlockLeave = () => {
-    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
-    if (!isMobile) {
-      // Add a small delay to allow moving to tooltip
-      setTimeout(() => {
-        const tooltip = document.querySelector('.tooltip:hover');
-        if (!tooltip) {
-          setActiveTooltip(null);
-        }
-      }, 100);
-    }
-  };
-
-  const handleTooltipEnter = () => {
-    // Keep tooltip open when hovering over it
-  };
-
-  const handleTooltipLeave = () => {
-    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
-    if (!isMobile) {
-      setActiveTooltip(null);
-    }
   };
 
   const handleCloseTooltip = () => {
@@ -160,8 +120,6 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
               text={component.text}
               type={component.type}
               onClick={(event) => handleBlockClick(component.text, component.type, event)}
-              onMouseEnter={(event) => handleBlockHover(component.text, component.type, event)}
-              onMouseLeave={handleBlockLeave}
               isActive={activeTooltip?.text === component.text && activeTooltip?.type === component.type}
               hasPrefix={!!word.components.prefix}
               hasSuffix={!!word.components.suffix}
@@ -178,8 +136,6 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
             position={activeTooltip.position}
             onClose={() => setActiveTooltip(null)}
             onWordSelect={onWordSelect}
-            onMouseEnter={handleTooltipEnter}
-            onMouseLeave={handleTooltipLeave}
           />
         )}
       </AnimatePresence>

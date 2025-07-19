@@ -10,25 +10,18 @@ interface MorphemeTooltipProps {
   position: { x: number; y: number };
   onClose: () => void;
   onWordSelect?: (word: string) => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
 }
 
-export default function MorphemeTooltip({ text, type, position, onClose, onWordSelect, onMouseEnter, onMouseLeave }: MorphemeTooltipProps) {
+export default function MorphemeTooltip({ text, type, position, onClose, onWordSelect }: MorphemeTooltipProps) {
   const { data: morpheme, isLoading } = useQuery({
     queryKey: ["/api/morphemes", text, type],
   });
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
-    
     const handleClickOutside = (event: MouseEvent) => {
-      // Only close on click outside for mobile devices
-      if (isMobile) {
-        const target = event.target as HTMLElement;
-        if (!target.closest(".tooltip") && !target.closest(".lego-block")) {
-          onClose();
-        }
+      const target = event.target as HTMLElement;
+      if (!target.closest(".tooltip") && !target.closest(".lego-block")) {
+        onClose();
       }
     };
 
@@ -38,15 +31,11 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
       }
     };
 
-    if (isMobile) {
-      document.addEventListener("click", handleClickOutside);
-    }
+    document.addEventListener("click", handleClickOutside);
     document.addEventListener("keydown", handleEscape);
 
     return () => {
-      if (isMobile) {
-        document.removeEventListener("click", handleClickOutside);
-      }
+      document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
   }, [onClose]);
@@ -96,8 +85,6 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
     >
       <div className="tooltip-content">
         <div className="flex items-center mb-3">
