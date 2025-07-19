@@ -114,11 +114,10 @@ export default function VocabularyBuilder() {
                 {suggestions.map((word) => (
                   <div
                     key={word.word}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0 text-left"
                     onClick={() => handleWordSelect(word.word)}
                   >
                     <div className="font-medium">{word.word}</div>
-                    <div className="text-sm text-gray-600 truncate">{word.definition}</div>
                   </div>
                 ))}
               </div>
