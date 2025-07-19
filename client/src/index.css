@@ -141,67 +141,78 @@
     inset 0 2px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Root Block - has side grooves carved into the block */
+/* Root Block - has side grooves that match connector shapes */
 .root-block {
   background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
   border-radius: 8px;
   position: relative;
-  /* Create side grooves using clip-path */
+  /* Create matching grooves for prefix and suffix connectors */
   clip-path: polygon(
-    8px 0%, 
-    100% 0%, 
-    100% 25%, 
-    calc(100% - 8px) 25%, 
-    calc(100% - 8px) 75%, 
-    100% 75%, 
+    0% 0%, 
+    0% 35%, 
+    8px 35%, 
+    8px 40%, 
+    16px 40%, 
+    16px 60%, 
+    8px 60%, 
+    8px 65%, 
+    0% 65%, 
+    0% 100%, 
     100% 100%, 
-    8px 100%, 
-    8px 75%, 
-    0% 75%, 
-    0% 25%, 
-    8px 25%
+    100% 65%, 
+    calc(100% - 8px) 65%, 
+    calc(100% - 8px) 60%, 
+    calc(100% - 16px) 60%, 
+    calc(100% - 16px) 40%, 
+    calc(100% - 8px) 40%, 
+    calc(100% - 8px) 35%, 
+    100% 35%, 
+    100% 0%
   );
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* Add depth shadows to the grooves */
+/* Left groove shadow */
 .root-block::before {
   content: '';
   position: absolute;
-  left: 0px;
-  top: 25%;
+  left: 8px;
+  top: 40%;
   width: 8px;
-  height: 50%;
+  height: 20%;
   background: 
     linear-gradient(to right, 
-      rgba(0, 0, 0, 0.4) 0%, 
-      rgba(0, 0, 0, 0.2) 50%, 
-      transparent 100%
+      rgba(0, 0, 0, 0.5) 0%, 
+      rgba(0, 0, 0, 0.3) 50%, 
+      rgba(0, 0, 0, 0.1) 100%
     );
+  border-radius: 0 4px 4px 0;
   box-shadow: 
-    inset 2px 0 4px rgba(0, 0, 0, 0.3),
-    inset 0 2px 2px rgba(0, 0, 0, 0.2),
-    inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+    inset 2px 0 3px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* Right groove shadow */
 .root-block::after {
   content: '';
   position: absolute;
-  right: 0px;
-  top: 25%;
+  right: 8px;
+  top: 40%;
   width: 8px;
-  height: 50%;
+  height: 20%;
   background: 
     linear-gradient(to left, 
-      rgba(0, 0, 0, 0.4) 0%, 
-      rgba(0, 0, 0, 0.2) 50%, 
-      transparent 100%
+      rgba(0, 0, 0, 0.5) 0%, 
+      rgba(0, 0, 0, 0.3) 50%, 
+      rgba(0, 0, 0, 0.1) 100%
     );
+  border-radius: 4px 0 0 4px;
   box-shadow: 
-    inset -2px 0 4px rgba(0, 0, 0, 0.3),
-    inset 0 2px 2px rgba(0, 0, 0, 0.2),
-    inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+    inset -2px 0 3px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Suffix Block - has connector on left side */
