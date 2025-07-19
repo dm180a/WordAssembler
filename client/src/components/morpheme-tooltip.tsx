@@ -63,7 +63,7 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
         exit={{ opacity: 0, y: 10 }}
       >
         <div className="tooltip-content">
-          <div className="text-center py-4">Loading...</div>
+          <div className="text-center py-4 text-gray-800 dark:text-gray-100">Loading...</div>
         </div>
       </motion.div>
     );
@@ -92,17 +92,17 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
             className="w-6 h-6 rounded mr-3" 
             style={{ backgroundColor: getBlockColor(morpheme.type) }}
           />
-          <h4 className="font-bold text-lg">
+          <h4 className="font-bold text-lg text-gray-800 dark:text-gray-100">
             {morpheme.text} ({morpheme.type})
           </h4>
         </div>
         
-        <p className="text-gray-600 mb-3">
+        <p className="text-gray-600 dark:text-gray-300 mb-3">
           {morpheme.definition}
         </p>
         
         <div className="mb-3">
-          <h5 className="font-semibold text-gray-800 mb-2">Other examples:</h5>
+          <h5 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">Other examples:</h5>
           <div className="flex flex-wrap gap-2">
             {morpheme.examples.map((example, index) => (
               <button 
@@ -113,7 +113,7 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
                     onClose();
                   }
                 }}
-                className="bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-700 px-2 py-1 rounded text-sm transition-colors cursor-pointer border hover:border-blue-300"
+                className="bg-gray-100 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-blue-800 text-gray-700 dark:text-gray-200 hover:text-blue-700 dark:hover:text-blue-300 px-2 py-1 rounded text-sm transition-colors cursor-pointer border dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500"
               >
                 {example}
               </button>
@@ -123,7 +123,7 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
         
         <Button 
           onClick={onClose}
-          className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800"
+          className="w-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100"
           variant="secondary"
         >
           Close

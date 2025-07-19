@@ -302,6 +302,12 @@
   z-index: 50;
 }
 
+.dark .tooltip {
+  background: hsl(240, 10%, 15%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid hsl(240, 3.7%, 25%);
+}
+
 .tooltip::before {
   content: '';
   position: absolute;
@@ -311,6 +317,10 @@
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 8px solid white;
+}
+
+.dark .tooltip::before {
+  border-bottom: 8px solid hsl(240, 10%, 15%);
 }
 
 /* Word Container */

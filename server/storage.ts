@@ -480,6 +480,10 @@ export class MemStorage implements IStorage {
       { text: "historic", type: "root", definition: "Famous in history", examples: ["prehistoric", "historical", "historian", "history"] },
       { text: "rely", type: "root", definition: "To depend on", examples: ["reliable", "unreliable", "relying", "relied"] },
       
+      // Additional prefixes
+      { text: "pro-", type: "prefix", definition: "Forward or in favor of", examples: ["promotion", "progress", "project", "propose"] },
+      { text: "e-", type: "prefix", definition: "Out or from", examples: ["emotion", "evaporate", "evacuate", "emerge"] },
+      
       // Additional suffixes
       { text: "-able", type: "suffix", definition: "Capable of being", examples: ["agreeable", "comfortable", "readable", "breakable"] },
       { text: "-less", type: "suffix", definition: "Without", examples: ["hopeless", "careless", "harmless", "endless"] },
