@@ -7,8 +7,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get all words
   app.get("/api/words", async (req, res) => {
     try {
+      const { search } = req.query;
       const words = await storage.getAllWords();
-      res.json(words);
+      
+      if (search && typeof search === 'string') {
+        const filteredWords = words.filter(word => 
+          word.word.toLowerCase().includes(search.toLowerCase())
+        );
+        res.json(filteredWords);
+      } else {
+        res.json(words);
+      }
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch words" });
     }

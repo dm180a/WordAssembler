@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import WordDisplay from "@/components/word-display";
 import type { Word } from "@shared/schema";
 
 export default function VocabularyBuilder() {
   const [currentWordText, setCurrentWordText] = useState("dishonesty");
   const [isAssembled, setIsAssembled] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const { data: words, isLoading: wordsLoading } = useQuery({
     queryKey: ["/api/words"],
   });
+
+  const { data: searchResults, isLoading: searchLoading } = useQuery({
+    queryKey: ["/api/words", "search", searchTerm],
+    queryFn: async () => {
+      const response = await fetch(`/api/words?search=${encodeURIComponent(searchTerm)}`);
+      if (!response.ok) throw new Error('Failed to search words');
+      return response.json();
+    },
+    enabled: searchTerm.length >= 2,
+  });
+
+  const suggestions = useMemo(() => {
+    if (!searchTerm || searchTerm.length < 2) return [];
+    return searchResults?.slice(0, 5) || [];
+  }, [searchResults, searchTerm]);
 
   const { data: currentWord, isLoading: currentWordLoading } = useQuery({
     queryKey: ["/api/words", currentWordText],
@@ -29,6 +48,25 @@ export default function VocabularyBuilder() {
   const handleWordSelect = (word: string) => {
     setCurrentWordText(word);
     setIsAssembled(true);
+    setSearchTerm("");
+    setShowSuggestions(false);
+  };
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    setShowSuggestions(value.length >= 2);
+  };
+
+  const handleSearchInputFocus = () => {
+    if (searchTerm.length >= 2) {
+      setShowSuggestions(true);
+    }
+  };
+
+  const handleSearchInputBlur = () => {
+    // Delay hiding suggestions to allow clicking on them
+    setTimeout(() => setShowSuggestions(false), 200);
   };
 
   const getBlockColor = (type: string) => {
@@ -54,7 +92,47 @@ export default function VocabularyBuilder() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">🧱 Word Assembler</h1>
-
+          
+          {/* Search Section */}
+          <div className="relative max-w-md mx-auto mb-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="단어 검색... (예: disappear)"
+                value={searchTerm}
+                onChange={handleSearchInputChange}
+                onFocus={handleSearchInputFocus}
+                onBlur={handleSearchInputBlur}
+                className="pl-10 pr-4 py-2 w-full"
+              />
+            </div>
+            
+            {/* Search Suggestions */}
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10 mt-1">
+                {suggestions.map((word) => (
+                  <div
+                    key={word.word}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
+                    onClick={() => handleWordSelect(word.word)}
+                  >
+                    <div className="font-medium">{word.word}</div>
+                    <div className="text-sm text-gray-600 truncate">{word.definition}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {/* No results message */}
+            {showSuggestions && searchTerm.length >= 2 && suggestions.length === 0 && !searchLoading && (
+              <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10 mt-1">
+                <div className="px-4 py-2 text-gray-500 text-center">
+                  "{searchTerm}"에 대한 검색 결과가 없습니다
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Main Vocabulary Card */}
