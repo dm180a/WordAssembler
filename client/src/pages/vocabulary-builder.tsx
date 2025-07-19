@@ -82,21 +82,17 @@ export default function VocabularyBuilder() {
               </div>
             </div>
 
-            {/* Control Buttons */}
-            <div className="flex justify-center gap-4 mb-8">
+            {/* Toggle Button */}
+            <div className="flex justify-center mb-8">
               <Button 
-                onClick={handleAssemble}
-                className="bg-lego-blue hover:bg-blue-600 text-white"
-                disabled={isAssembled}
+                onClick={isAssembled ? handleDisassemble : handleAssemble}
+                className={`${
+                  isAssembled 
+                    ? "bg-lego-orange hover:bg-orange-600" 
+                    : "bg-lego-blue hover:bg-blue-600"
+                } text-white transition-colors duration-300`}
               >
-                🔨 Assemble
-              </Button>
-              <Button 
-                onClick={handleDisassemble}
-                className="bg-lego-orange hover:bg-orange-600 text-white"
-                disabled={!isAssembled}
-              >
-                🔧 Disassemble
+                {isAssembled ? "🔧 Disassemble" : "🔨 Assemble"}
               </Button>
             </div>
 
