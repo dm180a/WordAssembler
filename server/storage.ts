@@ -48,7 +48,7 @@ export class MemStorage implements IStorage {
       text: "-y",
       type: "suffix", 
       definition: 'Forms nouns meaning "quality of" or "state of being"',
-      examples: ["honesty", "happiness", "darkness", "weakness"]
+      examples: ["honesty", "safety", "beauty", "loyalty"]
     });
 
     const unMorpheme = await this.createMorpheme({
@@ -493,6 +493,40 @@ export class MemStorage implements IStorage {
     // Create additional morphemes
     for (const morphemeData of additionalMorphemes) {
       await this.createMorpheme(morphemeData);
+    }
+
+    // Add more -y suffix words and their roots
+    const ySuffixWords = [
+      { word: "safety", definition: "the condition of being safe", components: { prefix: "", root: "safe", suffix: "-y" }},
+      { word: "beauty", definition: "the quality of being beautiful", components: { prefix: "", root: "beauty", suffix: "" }}, // beauty is actually the root
+      { word: "loyalty", definition: "the quality of being loyal", components: { prefix: "", root: "loyal", suffix: "-y" }},
+      { word: "penalty", definition: "a punishment for wrongdoing", components: { prefix: "", root: "penal", suffix: "-y" }},
+      { word: "novelty", definition: "the quality of being new", components: { prefix: "", root: "novel", suffix: "-y" }},
+      { word: "specialty", definition: "a special skill or area", components: { prefix: "", root: "special", suffix: "-y" }},
+      { word: "honesty", definition: "the quality of being honest", components: { prefix: "", root: "honest", suffix: "-y" }},
+      { word: "modesty", definition: "the quality of being modest", components: { prefix: "", root: "modest", suffix: "-y" }},
+      { word: "plenty", definition: "a large amount", components: { prefix: "", root: "plent", suffix: "-y" }},
+      { word: "empty", definition: "containing nothing", components: { prefix: "", root: "empt", suffix: "-y" }}
+    ];
+
+    // Add corresponding root morphemes
+    const yRootMorphemes = [
+      { text: "loyal", type: "root", definition: "Faithful and devoted", examples: ["loyalty", "disloyal", "loyalist", "loyally"] },
+      { text: "penal", type: "root", definition: "Related to punishment", examples: ["penalty", "penalize", "penal", "penalties"] },
+      { text: "novel", type: "root", definition: "New and original", examples: ["novelty", "novelist", "novelize", "novels"] },
+      { text: "special", type: "root", definition: "Better than usual", examples: ["specialty", "specialist", "specialize", "specially"] },
+      { text: "modest", type: "root", definition: "Not boastful", examples: ["modesty", "modestly", "immodest", "modestness"] },
+      { text: "plent", type: "root", definition: "Abundance", examples: ["plenty", "plentiful", "replenish", "plenty"] },
+      { text: "empt", type: "root", definition: "Without contents", examples: ["empty", "emptied", "emptying", "emptiness"] }
+    ];
+
+    // Create y-suffix morphemes and words
+    for (const morphemeData of yRootMorphemes) {
+      await this.createMorpheme(morphemeData);
+    }
+
+    for (const wordData of ySuffixWords) {
+      await this.createWord(wordData);
     }
 
     // Create all vocabulary words
