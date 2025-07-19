@@ -69,6 +69,13 @@ export default function VocabularyBuilder() {
     setTimeout(() => setShowSuggestions(false), 200);
   };
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && suggestions.length > 0) {
+      e.preventDefault();
+      handleWordSelect(suggestions[0].word);
+    }
+  };
+
   const getBlockColor = (type: string) => {
     switch (type) {
       case "prefix": return "lego-red";
@@ -104,6 +111,7 @@ export default function VocabularyBuilder() {
                 onChange={handleSearchInputChange}
                 onFocus={handleSearchInputFocus}
                 onBlur={handleSearchInputBlur}
+                onKeyDown={handleSearchKeyDown}
                 className="pl-10 pr-4 py-2 w-full"
               />
             </div>
