@@ -24,13 +24,10 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* LEGO colors */
-  --lego-red: hsl(0, 84%, 60%);
-  --lego-blue: hsl(207, 90%, 54%);
-  --lego-green: hsl(147, 51%, 47%);
-  --lego-yellow: hsl(51, 93%, 66%);
-  --lego-purple: hsl(257, 69%, 73%);
-  --lego-orange: hsl(25, 95%, 53%);
+  /* LEGO colors for morphemes */
+  --lego-prefix: hsl(120, 40%, 75%); /* Light green for prefix */
+  --lego-root: hsl(30, 45%, 70%); /* Light brown for root (plant root color) */
+  --lego-suffix: hsl(50, 60%, 80%); /* Light yellow for suffix */
 }
 
 .dark {
@@ -119,7 +116,7 @@
 
 /* Prefix Block - connector on right side */
 .prefix-block {
-  background: linear-gradient(145deg, var(--lego-red), hsl(0, 70%, 50%));
+  background: linear-gradient(145deg, var(--lego-prefix), hsl(120, 35%, 65%));
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -134,7 +131,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 24px;
-  background: linear-gradient(145deg, var(--lego-red), hsl(0, 70%, 50%));
+  background: linear-gradient(145deg, var(--lego-prefix), hsl(120, 35%, 65%));
   border-radius: 0 8px 8px 0;
   box-shadow: 
     2px 0 4px rgba(0, 0, 0, 0.2),
@@ -143,7 +140,7 @@
 
 /* Root Block - simple side grooves to match connectors */
 .root-block {
-  background: linear-gradient(145deg, var(--lego-blue), hsl(207, 85%, 45%));
+  background: linear-gradient(145deg, var(--lego-root), hsl(30, 40%, 60%));
   border-radius: 8px;
   position: relative;
   /* Simple rectangular grooves on sides */
@@ -197,7 +194,7 @@
 
 /* Suffix Block - has connector on left side */
 .suffix-block {
-  background: linear-gradient(145deg, var(--lego-green), hsl(147, 45%, 40%));
+  background: linear-gradient(145deg, var(--lego-suffix), hsl(50, 55%, 70%));
   border-radius: 8px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -212,7 +209,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 24px;
-  background: linear-gradient(145deg, var(--lego-green), hsl(147, 45%, 40%));
+  background: linear-gradient(145deg, var(--lego-suffix), hsl(50, 55%, 70%));
   border-radius: 8px 0 0 8px;
   box-shadow: 
     -2px 0 4px rgba(0, 0, 0, 0.2),
