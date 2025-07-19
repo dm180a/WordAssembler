@@ -48,7 +48,7 @@ export class MemStorage implements IStorage {
       text: "-y",
       type: "suffix", 
       definition: 'Forms nouns meaning "quality of" or "state of being"',
-      examples: ["honesty", "safety", "beauty", "loyalty"]
+      examples: ["honesty", "safety", "modesty", "plenty"]
     });
 
     const unMorpheme = await this.createMorpheme({
@@ -487,7 +487,8 @@ export class MemStorage implements IStorage {
       { text: "-ing", type: "suffix", definition: "Present action", examples: ["reading", "writing", "running", "singing"] },
       { text: "-ed", type: "suffix", definition: "Past action", examples: ["played", "worked", "walked", "talked"] },
       { text: "-tion", type: "suffix", definition: "The act of", examples: ["creation", "education", "celebration", "information"] },
-      { text: "-ably", type: "suffix", definition: "In a way that can be", examples: ["disagreeably", "comfortably", "remarkably", "predictably"] }
+      { text: "-ably", type: "suffix", definition: "In a way that can be", examples: ["disagreeably", "comfortably", "remarkably", "predictably"] },
+      { text: "-ty", type: "suffix", definition: "State or quality of being", examples: ["loyalty", "safety", "beauty", "novelty"] }
     ];
 
     // Create additional morphemes
@@ -499,10 +500,10 @@ export class MemStorage implements IStorage {
     const ySuffixWords = [
       { word: "safety", definition: "the condition of being safe", components: { prefix: "", root: "safe", suffix: "-y" }},
       { word: "beauty", definition: "the quality of being beautiful", components: { prefix: "", root: "beauty", suffix: "" }}, // beauty is actually the root
-      { word: "loyalty", definition: "the quality of being loyal", components: { prefix: "", root: "loyal", suffix: "-y" }},
-      { word: "penalty", definition: "a punishment for wrongdoing", components: { prefix: "", root: "penal", suffix: "-y" }},
-      { word: "novelty", definition: "the quality of being new", components: { prefix: "", root: "novel", suffix: "-y" }},
-      { word: "specialty", definition: "a special skill or area", components: { prefix: "", root: "special", suffix: "-y" }},
+      { word: "loyalty", definition: "the quality of being loyal", components: { prefix: "", root: "loyal", suffix: "-ty" }},
+      { word: "penalty", definition: "a punishment for wrongdoing", components: { prefix: "", root: "penal", suffix: "-ty" }},
+      { word: "novelty", definition: "the quality of being new", components: { prefix: "", root: "novel", suffix: "-ty" }},
+      { word: "specialty", definition: "a special skill or area", components: { prefix: "", root: "special", suffix: "-ty" }},
       { word: "honesty", definition: "the quality of being honest", components: { prefix: "", root: "honest", suffix: "-y" }},
       { word: "modesty", definition: "the quality of being modest", components: { prefix: "", root: "modest", suffix: "-y" }},
       { word: "plenty", definition: "a large amount", components: { prefix: "", root: "plent", suffix: "-y" }},
