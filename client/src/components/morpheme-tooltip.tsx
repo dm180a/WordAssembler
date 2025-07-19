@@ -10,9 +10,11 @@ interface MorphemeTooltipProps {
   position: { x: number; y: number };
   onClose: () => void;
   onWordSelect?: (word: string) => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-export default function MorphemeTooltip({ text, type, position, onClose, onWordSelect }: MorphemeTooltipProps) {
+export default function MorphemeTooltip({ text, type, position, onClose, onWordSelect, onMouseEnter, onMouseLeave }: MorphemeTooltipProps) {
   const { data: morpheme, isLoading } = useQuery({
     queryKey: ["/api/morphemes", text, type],
   });
@@ -94,6 +96,8 @@ export default function MorphemeTooltip({ text, type, position, onClose, onWordS
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="tooltip-content">
         <div className="flex items-center mb-3">

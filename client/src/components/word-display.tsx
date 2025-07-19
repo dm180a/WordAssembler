@@ -48,6 +48,23 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
   const handleBlockLeave = () => {
     const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
     if (!isMobile) {
+      // Add a small delay to allow moving to tooltip
+      setTimeout(() => {
+        const tooltip = document.querySelector('.tooltip:hover');
+        if (!tooltip) {
+          setActiveTooltip(null);
+        }
+      }, 100);
+    }
+  };
+
+  const handleTooltipEnter = () => {
+    // Keep tooltip open when hovering over it
+  };
+
+  const handleTooltipLeave = () => {
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+    if (!isMobile) {
       setActiveTooltip(null);
     }
   };
@@ -159,8 +176,10 @@ export default function WordDisplay({ word, isAssembled, onWordSelect }: WordDis
             text={activeTooltip.text}
             type={activeTooltip.type}
             position={activeTooltip.position}
-            onClose={handleCloseTooltip}
+            onClose={() => setActiveTooltip(null)}
             onWordSelect={onWordSelect}
+            onMouseEnter={handleTooltipEnter}
+            onMouseLeave={handleTooltipLeave}
           />
         )}
       </AnimatePresence>
