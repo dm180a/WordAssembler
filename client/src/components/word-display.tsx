@@ -46,7 +46,8 @@ export default function WordDisplay({ word, isAssembled }: WordDisplayProps) {
   };
 
   const blockVariants = {
-    assembled: {
+    assembled: (index: number) => ({
+      x: 0,
       y: 0,
       opacity: 1,
       scale: 1,
@@ -55,19 +56,22 @@ export default function WordDisplay({ word, isAssembled }: WordDisplayProps) {
         type: "spring",
         damping: 15,
         stiffness: 300,
+        delay: index * 0.1,
       },
-    },
-    disassembled: {
-      y: -200,
-      opacity: 0,
-      scale: 0.8,
-      rotate: -10,
+    }),
+    disassembled: (index: number) => ({
+      x: (index - 1) * 120, // Spread blocks horizontally
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
       transition: {
         type: "spring",
         damping: 20,
         stiffness: 400,
+        delay: index * 0.1,
       },
-    },
+    }),
   };
 
   const components = [];
@@ -99,29 +103,26 @@ export default function WordDisplay({ word, isAssembled }: WordDisplayProps) {
         animate={isAssembled ? "assembled" : "disassembled"}
         initial="assembled"
       >
-        <AnimatePresence mode="sync">
-          {components.map((component, index) => (
-            <motion.div
-              key={`${component.text}-${component.type}`}
-              variants={blockVariants}
-              initial={isAssembled ? "assembled" : "disassembled"}
-              animate={isAssembled ? "assembled" : "disassembled"}
-              exit="disassembled"
-              custom={index}
-              style={{
-                display: "inline-block",
-                margin: "0 4px",
-              }}
-            >
-              <LegoBlock
-                text={component.text}
-                type={component.type}
-                onClick={(event) => handleBlockClick(component.text, component.type, event)}
-                isActive={activeTooltip?.text === component.text && activeTooltip?.type === component.type}
-              />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {components.map((component, index) => (
+          <motion.div
+            key={`${component.text}-${component.type}`}
+            variants={blockVariants}
+            initial="assembled"
+            animate={isAssembled ? "assembled" : "disassembled"}
+            custom={index}
+            style={{
+              display: "inline-block",
+              margin: isAssembled ? "0" : "0 8px",
+            }}
+          >
+            <LegoBlock
+              text={component.text}
+              type={component.type}
+              onClick={(event) => handleBlockClick(component.text, component.type, event)}
+              isActive={activeTooltip?.text === component.text && activeTooltip?.type === component.type}
+            />
+          </motion.div>
+        ))}
       </motion.div>
 
       <AnimatePresence>
